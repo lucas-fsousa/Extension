@@ -1,17 +1,17 @@
-﻿# Project Extends
+﻿# Extension
 
 A repertoire with several methods to assist in multitasking.
 
 ## Installation
 
-To install, just run the C# compiler to generate the .dll file and once the file has been generated, just add the reference to the project or use [Nuget](https://www.nuget.org/packages/PublicUtility.ProjectExtends) or in nuget console, use the following command:
+To install, just run the C# compiler to generate the .dll file and once the file has been generated, just add the reference to the project or use [Nuget](https://www.nuget.org/packages/PublicUtility.Extension) or in nuget console, use the following command:
 
 
 ```bash
-install-Package PublicUtility.ProjectExtends
+install-Package PublicUtility.Extension
 ```
 
-## Methods
+## Methods in Extends Class
 
 ### Println & Print
 These items are equivalent to the default "Console.WriteLine" and "Console.Write" from the System namespace. However, it presents more features such as the use by extension without the need to invoke the object directly. It can be used to show the detail of objects on the console through Serealization, it can also be used to change the default color of console letters to one of the available colors.
@@ -38,7 +38,7 @@ These items are equivalent to the default "Console.WriteLine" and "Console.Write
 #### How to use
 
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 var anyString = "This is a long string name for custom print or println";
 
@@ -75,7 +75,7 @@ Closing the change is handled by "]##", thus forming "##C15[xxxxxxxx]##". In the
 
 #### How to use
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 var name = "PROFILE";
 var system = "WINDOWS";
@@ -101,7 +101,7 @@ Converters are methods for converting value types strategically and quickly duri
 
 #### How to use:
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 string number = "1041.31";
 
@@ -120,7 +120,7 @@ Gets the safe value of a return. If the returned value cannot be converted to th
 
 #### How to use:
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 string datetimeOK = "30-08-2022";
 string datetimeNOK = "30;08;2022";
@@ -139,7 +139,7 @@ The Json Serealization and Deserealization library does not yet offer support fo
 
 #### How to use:
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 // FOR DATA TABLES
 var myObjects = Extension.DeserializeTable<MyCustomObjectModel[]>(MyDataTable); // use example 1
@@ -172,7 +172,7 @@ Used to validate data return in an agile and simplified way to avoid the use of 
 
 #### How to use:
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 string any = "1";
 
@@ -195,7 +195,7 @@ They are methods that perform the action of collecting information from a point,
 
 #### How to use:
 ```csharp
-using PublicUtility.ProjectExtends;
+using PublicUtility.Extension;
 
 var list1 = new List<int>() { 1, 2, 3, 4, 5 };
 var list2 = new List<int>() { 4, 5, 6, 7, 8 };
@@ -207,7 +207,45 @@ var nextValue = uniques.GetNext(3); // get the next item in the object list. Out
 var nextInt = Extension.GetNext(213); // // get the next value in the sequence of integers. output 214
 
 ```
+## DB Class
+Class used for work with sql server database. Simplified methods that use sql transaction to complete activities securely. Below are examples of usage.
 
+#### How to use:
+```csharp
+using PublicUtility.Extension;
+
+// ************* USE EXAMPLE 1 ************
+using var conn = DB.GetConn("myConnString"); // opens a new Sql server connection
+var query = new StringBuilder();
+var cmd = new SqlCommand();
+
+query.AppendLine("SELECT * FROM MYTABLE");
+query.AppendLine("WHERE ID = @ID");
+
+cmd.CommandText = query.ToString();
+cmd.Parameters.AddWithValue("ID", 10);
+
+var dataTable = conn.ReturnData(cmd);
+
+
+// ************* USE EXAMPLE 2 ************
+using var conn = DB.GetConn("myConnString"); // opens a new Sql server connection
+var query = "UPDATE MY TABLE SET NAME = NEWNAME WHERE ID = @ID";
+var cmd = new SqlCommand();
+
+cmd.CommandText = query.ToString();
+cmd.Parameters.AddWithValue("ID", 10);
+cmd.Parameters.AddWithValue("NEWNAME", "IS A TEST NAME");
+conn.ExecCmd(cmd);
+
+
+// ************* USE EXAMPLE 3 ************
+using var conn = DB.GetConn("myConnString"); // opens a new Sql server connection
+var query = "SELECT * FROM MYTABLE";
+var dataTable = conn.ReturnData(query);
+
+```
+####
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
