@@ -1,7 +1,11 @@
 ﻿using PublicUtility.Extension.Converters;
+using PublicUtility.Nms;
+using PublicUtility.Nms.Enums;
 using System.Collections;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO.Compression;
 using System.Text;
 using System.Text.Json;
@@ -425,6 +429,26 @@ namespace PublicUtility.Extension {
     public static T JsonDeserialize<T>(this string jsonStringObject) => JsonSerializer.Deserialize<T>(jsonStringObject, GetJsonSerializerOptions());
 
     public static string JsonSerialize<T>(this T objectToSerialize) => JsonSerializer.Serialize(objectToSerialize, GetJsonSerializerOptions());
+
+    public static void AsPng(this ImageStream stream, string pathToSave) {
+      if(OperatingSystem.IsWindows()) {
+        var img = Image.FromStream(stream);
+        img.Save(pathToSave, ImageFormat.Png);
+        return;
+      }
+
+      throw new PlatformNotSupportedException("platform not yet supported.");
+    }
+
+    public static void AsJpeg(this ImageStream stream, string pathToSave) {
+      if(OperatingSystem.IsWindows()) {
+        var img = Image.FromStream(stream);
+        img.Save(pathToSave, ImageFormat.Jpeg);
+        return;
+      }
+
+      throw new PlatformNotSupportedException("platform not yet supported.");
+    }
 
   }
 }

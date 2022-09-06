@@ -22,9 +22,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PublicUtility.Nms" Version="1.0.1" />
+    <PackageReference Include="PublicUtility.Nms" Version="1.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PublicUtility.Nms\PublicUtility.Nms.csproj" />
   </ItemGroup>
 
   <ItemGroup>
