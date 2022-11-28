@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace PublicUtility.Extension {
+namespace PublicUtility.Extension.Data.SqlServer {
   public class DB: IDisposable {
     private readonly SqlConnection con = null;
     private SqlTransaction tran = null;

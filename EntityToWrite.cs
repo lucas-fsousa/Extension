@@ -52,8 +52,6 @@
         if(!string.IsNullOrEmpty(temp))
           lstFrases.Add(new EntityToWrite(GetColor(string.Empty), temp));
 
-        var rec = message.ToLower()[startIndexFrase - 1];
-
         if(!message.ToLower()[startIndexFrase - 1].Equals('['))
           throw new Exception("SINTAX ERROR. INITIALIZATION TO APPLY COLOR NOT FOUND OR NOT REPORTED CORRECTLY. EX: \"##CXX[\"");
 

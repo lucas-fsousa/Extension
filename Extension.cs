@@ -427,5 +427,6 @@ namespace PublicUtility.Extension {
 
     public static string JsonSerialize<T>(this T objectToSerialize) => JsonSerializer.Serialize(objectToSerialize, GetJsonSerializerOptions());
 
+
   }
 }

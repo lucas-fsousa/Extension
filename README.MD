@@ -210,9 +210,9 @@ var nextInt = Extension.GetNext(213); // // get the next value in the sequence o
 ## DB Class
 Class used for work with sql server database. Simplified methods that use sql transaction to complete activities securely. Below are examples of usage.
 
-#### How to use:
+#### How to use - SQLSERVER:
 ```csharp
-using PublicUtility.Extension;
+using PublicUtility.Extension.Data.SqlServer;
 
 // ************* USE EXAMPLE 1 ************
 using var conn = DB.GetConn("myConnString"); // opens a new Sql server connection
@@ -245,7 +245,45 @@ var query = "SELECT * FROM MYTABLE";
 var dataTable = conn.ReturnData(query);
 
 ```
-####
+#### How to use - MYSQL:
+```csharp
+using PublicUtility.Extension.Data.MySql;
+
+// CONFIGURATION FOR CONNECTING TO THE SERVER.
+var builder = new MySqlConnectionStringBuilder() {
+  Server = "localhost",
+  Database = "dbmysql",
+  UserID = "root",
+  Password = "",
+  Port = 3306,
+  SslMode = MySqlSslMode.Required
+};
+
+// ************* USE EXAMPLE 1 ************
+using var con = DB.GetConn(builder);
+var dataTable = con.ReturnData("SELECT * FROM DBTESTE");
+
+// ************* USE EXAMPLE 2 ************
+using var con = DB.GetConn(builder);
+var resultOk = con.ExecQuery("INSERT INTO dbTeste VALUES(default, 'test')");
+
+// ************* USE EXAMPLE 2 ************
+using var con = DB.GetConn(builder);
+var query = new StringBuilder();
+var cmd = new MySqlCommand();
+
+query.Append("INSERT INTO DBTESTE VALUES ");
+query.Append("  (@default, @name01)");
+query.Append(", (@default, @number01)");
+
+cmd.CommandText = query.ToString();
+cmd.Parameters.AddWithValue("name01", "test01");
+cmd.Parameters.AddWithValue("number01", 010101);
+cmd.Parameters.AddWithValue("default", default);
+
+var resultOk = con.ExecCmd(cmd);
+
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
