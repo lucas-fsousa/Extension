@@ -19,15 +19,13 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Namespace movement. Data structures and enumerators have been moved to the PublicUtility.Nms namespace</PackageReleaseNotes>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Namespace movement. Database structures  have been moved to the PublicUtility.Sql namespace</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySqlConnector" Version="2.2.1" />
     <PackageReference Include="PublicUtility.Nms" Version="1.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
   </ItemGroup>
 
   <ItemGroup>
