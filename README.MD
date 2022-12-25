@@ -90,9 +90,9 @@ Converters are methods for converting value types strategically and quickly duri
 
 - AsDateFormmat(this string dateTime, string formmat = "yyyy/MM/dd HH:mm:ss")
 - AsBool<T>(this T obj)
-- AsInt32<T>(this T obj)
-- AsInt64<T>(this T obj)
-- AsInt16<T>(this T obj)
+- AsInt<T>(this T obj)
+- AsLong<T>(this T obj)
+- AsShort<T>(this T obj)
 - AsDouble<T>(this T obj)
 - AsDecimal<T>(this T obj, int precision = 2)
 - AsFloat<T>(this T obj)
@@ -108,7 +108,7 @@ string number = "1041.31";
 double convertedToDouble = number.AsDouble(); // output 1041.31
 decimal convertedToDecimal = convertedToDouble.AsDecimal(); // output 1041.31m
 float convertedToFloat = convertedToDecimal.AsFloat(); // output 1041.31f
-int convertedToInt = convertedToFloat.AsInt32(); // output 1041
+int convertedToInt = convertedToFloat.AsInt(); // output 1041
 
 ```
 
@@ -164,10 +164,10 @@ public class MyClass {
 Used to validate data return in an agile and simplified way to avoid the use of multi conditions.
 
 - IsFilled<T>(this T param) 
+- IsFilled<T>(this IEnumerable<T> enumerable) 
 - IsSomeBool(this string input)
 - IsAnyDate(this string input) 
 - IsNumber(this string input) 
-- IsEmpty<T>(this IEnumerable<T> enumerable) 
 - IsDefault<T>(this T value) 
 
 #### How to use:
@@ -187,24 +187,18 @@ bool isDefault = any.IsDefault(); // Checks if the value is the object's default
 
 They are methods that perform the action of collecting information from a point, be it an array, a list, an enumerator or other types of data. It can be used to locate object indices, values, distinctions, among others.
 
-- GetUniques<T>(this IList<T> main, IList<T> off)
 - GetIndex<T>(this IList<T> enumerable, T itemToLoc)
-- GetNext(this int value)
-- GetNext(this long value)
 - GetNext<T>(this IList<T> enumerable, T value)
 
 #### How to use:
 ```csharp
 using PublicUtility.Extension;
 
-var list1 = new List<int>() { 1, 2, 3, 4, 5 };
-var list2 = new List<int>() { 4, 5, 6, 7, 8 };
+var list1 = new List<int>() { 1, 2, 3, 9, 7, 5 };
 
-var uniques = Extension.GetUniques(list1, list2); // compares two lists of objects and returns a new list with unique objects. Output 1,2,3,4,5,6,7,8
-var indexNumber6 = uniques.GetIndex(6); // get the index of an item in a list or return -1 if not found. Output 5
-var indexNumber10 = uniques.GetIndex(10); // get the index of an item in a list or return -1 if not found. Output -1
-var nextValue = uniques.GetNext(3); // get the next item in the object list. Output 4
-var nextInt = Extension.GetNext(213); // // get the next value in the sequence of integers. output 214
+var indexNumber3 = list1.GetIndex(3); // get the index of an item in a list or return -1 if not found. Output 3
+var indexNumber10 = list1.GetIndex(10); // get the index of an item in a list or return -1 if not found. Output -1
+var nextValue = list1.GetNext(3); // get the next item in the object list. Output 9
 
 ```
 
