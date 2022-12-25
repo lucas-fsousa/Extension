@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <Title>PublicUtility.Extension</Title>
@@ -13,19 +13,18 @@
     <PackAsTool>False</PackAsTool>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>DOTNET;.NET6; .NET; EXTENSION; SQLSERVER; SQL; DATABASE; DATA; ADONET; HELPER; ASPNET; UTILS</PackageTags>
+    <PackageTags>DOTNET;.NET7; .NET; EXTENSION; HELPER; ASPNET; UTILS</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Lucas F Sousa</Authors>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>1.0.4</Version>
-    <PackageReleaseNotes>Namespace movement. Database structures  have been moved to the PublicUtility.Sql namespace</PackageReleaseNotes>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Resource optimization, namespace upgrade, package upgrade</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="PublicUtility.Nms" Version="1.0.2" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

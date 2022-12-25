@@ -5,7 +5,7 @@ namespace PublicUtility.Extension.Converters {
   public class CustomDateTimeConverter: JsonConverter<DateTime> {
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
       if(reader.TokenType == JsonTokenType.String) {
-        var temp = reader.GetString().ConvertToJsonDateTime().GetSafeValue<DateTime>();
+        var temp = reader.GetString().AsJsonDateTime().GetSafeValue<DateTime>();
         return temp;
       }
 

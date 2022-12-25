@@ -1,4 +1,4 @@
-﻿namespace PublicUtility.Extension { 
+﻿namespace PublicUtility.Extension {
   internal class EntityToWrite {
     internal EntityToWrite(ConsoleColor color, string message) {
       Message = message;
@@ -67,6 +67,7 @@
 
       if(!string.IsNullOrWhiteSpace(message))
         lstFrases.Add(new EntityToWrite(GetColor(string.Empty), message));
+
       return lstFrases;
     }
 
@@ -99,13 +100,9 @@
         Console.WriteLine(message);
       }
     }
-    
+
     internal static void WriteLine(object obj) => Console.WriteLine(obj);
 
     internal static void WriteLine() => Console.WriteLine();
   }
-
-
-
-
 }
