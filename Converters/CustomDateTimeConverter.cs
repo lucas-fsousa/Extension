@@ -12,7 +12,7 @@ namespace PublicUtility.Extension.Converters {
       return reader.GetDateTime();
     }
 
-    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options) => writer.WriteStringValue(value.AsString());
+    public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options) => writer.WriteStringValue(value.AsJsonDateTime());
 
   }
 }
