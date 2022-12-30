@@ -104,15 +104,28 @@ namespace PublicUtility.Extension {
       }
       return false;
     }
+    private static IList<Type> DBNums() => new List<Type> { typeof(int), typeof(long), typeof(byte), typeof(sbyte), typeof(decimal), typeof(float), typeof(double), typeof(ulong) };
 
     private static string GetJsonPropValue(DataColumn col, DataRow row, bool endObj = false) {
-      string line = $"\"{col.ColumnName}\" : {row[col].JsonSerialize()}";
+      string line;
+
+      if(DBNums().Contains(col.DataType)) {
+        var temp = row[col].AsString().Replace(',', '.');
+        line = $"\"{col.ColumnName}\" : {(temp.IsFilled() ? temp : 0)}";
+
+      } else if(col.DataType.IsArray) {
+        line = $"\"{col.ColumnName}\" : {row[col].JsonSerialize()}";
+
+      } else {
+        line = $"\"{col.ColumnName}\" : \"{row[col]}\"";
+      }
 
       if(!endObj)
         line = string.Concat(line, ',');
 
       return line;
     }
+
 
     #endregion
 
