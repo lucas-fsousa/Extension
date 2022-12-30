@@ -26,9 +26,23 @@ namespace PublicUtility.Extension {
         NumberHandling = JsonNumberHandling.AllowReadingFromString,
         Converters = {
           new CustomBoolConverter(),
+
           new CustomDateOnlyConverter(),
           new CustomTimeOnlyConverter(),
-          new CustomDateTimeConverter()
+          new CustomDateTimeConverter(),
+
+          new CustomNullableBoolConverter(),
+          new CustomNullableIntConverter(),
+          new CustomNullableUIntConverter(),
+          new CustomNullableLongConverter(),
+          new CustomNullableULongConverter(),
+          new CustomNullableFloatConverter(),
+          new CustomNullableDoubleConverter(),
+          new CustomNullableDecimalConverter(),
+          new CustomNullableByteConverter(),
+          new CustomNullableSByteConverter(),
+          new CustomNullableShortConverter(),
+          new CustomNullableUShortConverter(),
         }
       };
       return jsonOptions;

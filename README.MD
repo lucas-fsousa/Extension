@@ -89,6 +89,7 @@ Extension.Print($"##C13[ERROR]##: USER ##C06[{name}]## NOT FOUND IN THE SYSTEM #
 Converters are methods for converting value types strategically and quickly during a run. Assuming that we have a return from some object that can be either in a string format or in another primitive format and we want to get its real format, we can use the appropriate extender.
 
 - AsDateFormmat(this string dateTime, string formmat = "yyyy/MM/dd HH:mm:ss")
+- AsJsonDateTime(this object data)
 - AsBool<T>(this T obj)
 - AsInt<T>(this T obj)
 - AsLong<T>(this T obj)
