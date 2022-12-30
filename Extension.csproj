@@ -19,8 +19,8 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>2.0.1</Version>
-    <PackageReleaseNotes>Resource optimization, namespace upgrade, package upgrade</PackageReleaseNotes>
+    <Version>2.0.2</Version>
+    <PackageReleaseNotes>Fixed array realization bug when returning datatables</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
