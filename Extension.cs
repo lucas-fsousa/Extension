@@ -91,18 +91,8 @@ namespace PublicUtility.Extension {
       return false;
     }
 
-    private static IList<Type> DBNums() => new List<Type> { typeof(int), typeof(long), typeof(byte), typeof(sbyte), typeof(decimal), typeof(float), typeof(double), typeof(ulong) };
-
     private static string GetJsonPropValue(DataColumn col, DataRow row, bool endObj = false) {
-      string line;
-
-      if(DBNums().Contains(col.DataType)) {
-        var temp = row[col].AsString().Replace(',', '.');
-        line = $"\"{col.ColumnName}\" : {(temp.IsFilled() ? temp : 0)}";
-
-      } else {
-        line = $"\"{col.ColumnName}\" : \"{row[col]}\"";
-      }
+      string line = $"\"{col.ColumnName}\" : {row[col].JsonSerialize()}";
 
       if(!endObj)
         line = string.Concat(line, ',');
@@ -145,9 +135,9 @@ namespace PublicUtility.Extension {
 
       return JsonDeserialize<T>($"[{json.AsString()}]");
     }
-    
+
     public async static ValueTask<T> DeserializeTableAsync<T>(this DataTable table, CancellationToken cancellationToken = default) where T : IEnumerable {
-      return await Task.Run(T() => {
+      return await Task.Run(T () => {
         var json = new StringBuilder();
 
         if(!table.IsFilled())
@@ -175,9 +165,9 @@ namespace PublicUtility.Extension {
     public static string RemoveWhiteSpaces(this string str) => str.Where(x => !char.IsWhiteSpace(x)).ToString();
 
     public static T JsonDeserialize<T>(this string jsonStringObject) => JsonSerializer.Deserialize<T>(jsonStringObject, GetJsonSerializerOptions());
-    
+
     public async static ValueTask<T> JsonDeserializeAsync<T>(this Stream jsonUt8Stream, CancellationToken cancellationToken = default) => await JsonSerializer.DeserializeAsync<T>(jsonUt8Stream, GetJsonSerializerOptions(), cancellationToken);
-    
+
     public static string JsonSerialize<T>(this T objectToSerialize, bool ident = false) => JsonSerializer.Serialize(objectToSerialize, GetJsonSerializerOptions(ident));
 
     public async static Task JsonSerializeAsync<T>(this T objectToSerialize, Stream utf8Json, bool ident = false, CancellationToken cancellationToken = default) => await JsonSerializer.SerializeAsync(utf8Json, objectToSerialize, GetJsonSerializerOptions(ident), cancellationToken);
