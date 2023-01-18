@@ -1,4 +1,6 @@
-﻿namespace PublicUtility.Extension {
+﻿using System.Text;
+
+namespace PublicUtility.Extension {
   public static partial class Extends {
     public static string AsJsonDateTime(this object data) => data.GetSafeValue<DateTime>().ToString("s");
 
@@ -20,6 +22,19 @@
 
     public static char AsChar<T>(this T obj) => ConverToChar(obj);
 
-    public static string AsString<T>(this T obj) => obj.ToString();
+    public static string AsString(this object obj) => obj.ToString();
+
+    public static string AsString(this byte[] byteArray) => Encoding.UTF8.GetString(byteArray);
+
+    public static string AsString(this Stream stream) => stream.AsByteArray().AsString();
+
+    public static byte[] AsByteArray(this string utf8Base64String) => Encoding.UTF8.GetBytes(utf8Base64String);
+
+    public static byte[] AsByteArray(this Stream stream) {
+      var buffer = new byte[stream.Length];
+      stream.Read(buffer);
+      return buffer;
+    }
+    
   }
 }

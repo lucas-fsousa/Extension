@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace PublicUtility.Extension {
   public static partial class Extends {
@@ -12,11 +13,26 @@ namespace PublicUtility.Extension {
       return true;
     }
     
-    public static bool IsFilled<T>(this IEnumerable<T> enumerable) => enumerable.Any();
+    public static bool IsFilled<T>(this IEnumerable<T> enumerable) {
+      if(enumerable == null)
+        return false;
 
-    public static bool IsFilled<T>(this IList<T> list) => list.Any();
+      return enumerable.Any();
+    }
 
-    public static bool IsFilled<T>(this T[] arraylist) => arraylist.Any();
+    public static bool IsFilled<T>(this IList<T> list) {
+      if(list == null)
+        return false;
+
+      return list.Any();
+    }
+
+    public static bool IsFilled<T>(this T[] arraylist) {
+      if(arraylist == null)
+        return false;
+
+      return arraylist.Any();
+    }
     
     public static bool IsDefault<T>(this T value) => value.Equals(default(T));
 
