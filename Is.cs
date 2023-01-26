@@ -3,6 +3,7 @@ using System.Data;
 
 namespace PublicUtility.Extension {
   public static partial class Extends {
+
     public static bool IsFilled<T>(this T value) {
       if(value == null)
         return false;
@@ -37,7 +38,7 @@ namespace PublicUtility.Extension {
     public static bool IsDefault<T>(this T value) => value.Equals(default(T));
 
     public static bool IsSomeBool(this string input) {
-      if(string.IsNullOrEmpty(input))
+      if(!input.IsFilled())
         return false;
 
       else if(input == string.Format("false") || input == string.Format("False"))
@@ -66,9 +67,6 @@ namespace PublicUtility.Extension {
       var numbers = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',' };
 
       if(!input.IsFilled())
-        return false;
-
-      if(input.Where(x => x == ',').Count() > 1)
         return false;
 
       if(input.Where(x => !numbers.Contains(x)).IsFilled()) 

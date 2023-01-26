@@ -17,7 +17,7 @@ namespace PublicUtility.Extension {
       try { 
         JsonSerialize(array).Println(); 
       } catch(Exception) { 
-        array.ToString().Println(); 
+        array.AsString().Println(); 
       } 
     }
 
@@ -25,7 +25,7 @@ namespace PublicUtility.Extension {
       try { 
         JsonSerialize(list).Println(); 
       } catch(Exception) { 
-        list.ToString().Println(); 
+        list.AsString().Println(); 
       }
     }
 
@@ -49,7 +49,7 @@ namespace PublicUtility.Extension {
       try { 
         JsonSerialize(array).Print(); 
       } catch(Exception) { 
-        array.ToString().Print(); 
+        array.AsString().Print(); 
       } 
     }
 
@@ -57,14 +57,14 @@ namespace PublicUtility.Extension {
       try { 
         JsonSerialize(list).Print(); 
       } catch(Exception) { 
-        list.ToString().Print(); 
+        list.AsString().Print(); 
       } 
     }
 
     public static void Print<T>(this T obj) where T : class { 
       try { JsonSerialize(obj).Print(); 
       } catch(Exception) { 
-        obj.ToString().Print(); 
+        obj.AsString().Print(); 
       } 
     }
 

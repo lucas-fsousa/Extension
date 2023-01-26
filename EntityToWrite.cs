@@ -4,6 +4,7 @@
       Message = message;
       Color = color;
     }
+
     internal string Message { get; set; }
     internal ConsoleColor Color { get; set; }
   }
@@ -14,6 +15,7 @@
 
       if(string.IsNullOrEmpty(color))
         return ConsoleColor.Gray;
+
       try {
         var lstColor = new Dictionary<string, ConsoleColor>() {
         { "c01", ConsoleColor.Black },
@@ -49,7 +51,8 @@
         var endIndexFrase = message.ToLower().IndexOf("]##", startIndexFrase);
 
         var temp = message[..(startIndexFrase - 6)];
-        if(!string.IsNullOrEmpty(temp))
+
+        if(!temp.IsFilled())
           lstFrases.Add(new EntityToWrite(GetColor(string.Empty), temp));
 
         if(!message.ToLower()[startIndexFrase - 1].Equals('['))

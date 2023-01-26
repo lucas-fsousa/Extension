@@ -1,6 +1,7 @@
 ﻿using PublicUtility.Extension.Converters;
 using System.Collections;
 using System.Data;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ namespace PublicUtility.Extension {
   public static partial class Extends {
 
     #region PRIVATES
+   
     private static string ReplaceStrParams(string input, params object[] args) {
       int i = 0;
 
@@ -48,45 +50,52 @@ namespace PublicUtility.Extension {
       return jsonOptions;
     }
 
-    private static T ConvertToNumber<T>(object obj, int precision = 0) {
-      T response = default;
+    private static T ToIntType<T>(object @object, CultureInfo cultureInfo = null) {
+      var type = typeof(T);
+      var tempNum = @object.AsString();
 
-      if(obj.ToString().IsNumber()) {
-        string value = obj.ToString();
-        var splitChar = value.Split(',').Length > 0 ? ',' : '.';
+      if(!tempNum.IsFilled())
+        throw new ArgumentException($"{nameof(@object)} is null or empty!");
 
-        if(typeof(T) == typeof(decimal)) {
-          decimal dc = decimal.Round(decimal.Parse(value, System.Globalization.NumberStyles.Currency), precision);
-          response = (T)Convert.ChangeType(dc, typeof(T));
+      if(!tempNum.IsNumber())
+        throw new ArgumentException($"{nameof(@object)} not a number!");
 
-        } else if(typeof(T) == typeof(float)) {
-          float ft = float.Parse(value, System.Globalization.NumberStyles.Float);
-          response = (T)Convert.ChangeType(ft, typeof(T));
+      if(type == typeof(int))
+        return (T)Convert.ChangeType(int.Parse(tempNum, NumberStyles.Integer, cultureInfo), type);
 
-        } else if(typeof(T) == typeof(double)) {
-          double db = double.Parse(value, System.Globalization.NumberStyles.Any);
-          response = (T)Convert.ChangeType(db, typeof(T));
+      if(type == typeof(long))
+        return (T)Convert.ChangeType(long.Parse(tempNum, NumberStyles.Integer, cultureInfo), type);
 
-        } else if(typeof(T) == typeof(short)) {
-          short st = short.Parse(value.Split(splitChar)[0], System.Globalization.NumberStyles.Integer);
-          response = (T)Convert.ChangeType(st, typeof(T));
+      if(type == typeof(short))
+        return (T)Convert.ChangeType(short.Parse(tempNum, NumberStyles.Integer, cultureInfo), type);
 
-        } else if(typeof(T) == typeof(int)) {
-          int it = int.Parse(value.Split(splitChar)[0], System.Globalization.NumberStyles.Integer);
-          response = (T)Convert.ChangeType(it, typeof(T));
+      throw new Exception($"{nameof(@object)} is not a integer number!");
+    }
 
-        } else if(typeof(T) == typeof(long)) {
-          long lg = long.Parse(value.Split(splitChar)[0], System.Globalization.NumberStyles.Integer);
-          response = (T)Convert.ChangeType(lg, typeof(T));
+    private static T ToOtherNumberType<T>(object @object, int precision = 0, CultureInfo cultureInfo = null) {
+      var type = typeof(T);
+      var tempNum = @object.AsString();
 
-        }
-      }
+      if(!tempNum.IsFilled())
+        throw new ArgumentException($"{nameof(@object)} is null or empty!");
 
-      return response;
+      if(!tempNum.IsNumber())
+        throw new ArgumentException($"{nameof(@object)} not a number!");
+
+      if(type == typeof(decimal))
+        return (T)Convert.ChangeType(decimal.Round(decimal.Parse(tempNum, NumberStyles.Currency, cultureInfo), precision), type);
+
+      if(type == typeof(float))
+        return (T)Convert.ChangeType(float.Parse(tempNum, NumberStyles.Float, cultureInfo), type);
+
+      if(type == typeof(double))
+        return (T)Convert.ChangeType(double.Parse(tempNum, NumberStyles.Any, cultureInfo), type);
+
+      throw new Exception($"{nameof(@object)} is not a float number!");
     }
 
     private static char ConverToChar(object obj) {
-      if(obj.ToString().Length == 1)
+      if(obj.AsString().Length == 1)
         return Convert.ToChar(obj);
 
       return default;
@@ -95,7 +104,6 @@ namespace PublicUtility.Extension {
     private static bool ConvertoToBool(object obj) {
       var temp = obj.ToString();
       if(temp.IsSomeBool()) {
-
         if(temp.IsNumber())
           return Convert.ToBoolean(obj.AsShort());
 
@@ -104,6 +112,7 @@ namespace PublicUtility.Extension {
       }
       return false;
     }
+
     private static IList<Type> DBNums() => new List<Type> { typeof(int), typeof(long), typeof(byte), typeof(sbyte), typeof(decimal), typeof(float), typeof(double), typeof(ulong) };
 
     private static string GetJsonPropValue(DataColumn col, DataRow row, bool endObj = false) {
@@ -125,7 +134,6 @@ namespace PublicUtility.Extension {
 
       return line;
     }
-
 
     #endregion
 
