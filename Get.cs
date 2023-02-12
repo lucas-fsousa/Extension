@@ -3,53 +3,21 @@
 namespace PublicUtility.Extension {
   public static partial class Extends {
 
-    public static string GetOnlyNumbers(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsNumber).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlyNumbers(this IEnumerable<char> input) => input.Where(char.IsNumber).AsString();
 
-    public static string GetOnlyLetters(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsLetter).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlyLetters(this IEnumerable<char> input) => input.Where(char.IsLetter).AsString();
 
-    public static string GetOnlySymbols(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsSymbol).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlySymbols(this IEnumerable<char> input) => input.Where(char.IsSymbol).AsString();
 
-    public static string GetOnlySpecials(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsPunctuation).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlySpecials(this IEnumerable<char> input) => input.Where(char.IsPunctuation).AsString();
 
-    public static string GetOnlyUpper(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsUpper).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlyUpper(this IEnumerable<char> input) => input.Where(char.IsUpper).AsString();
 
-    public static string GetOnlyLower(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsLower).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlyLower(this IEnumerable<char> input) => input.Where(char.IsLower).AsString();
 
-    public static string GetOnlyWhiteSpace(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(char.IsWhiteSpace).ToList().ForEach(x => resp += x);
-      return resp; 
-    }
+    public static string GetOnlyWhiteSpace(this IEnumerable<char> input) => input.Where(char.IsWhiteSpace).AsString();
 
-    public static string GetOnlyLettersAndNumbers(this IEnumerable<char> input) {
-      string resp = string.Empty;
-      input.Where(x => char.IsLetter(x) || char.IsNumber(x)).ToList().ForEach(x => resp += x);
-      return resp;
-    }
+    public static string GetOnlyLettersAndNumbers(this IEnumerable<char> input) => input.Where(x => char.IsLetter(x) || char.IsNumber(x)).AsString();
 
     public static T GetSafeValue<T>(this T value) { 
       try { 

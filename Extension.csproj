@@ -19,8 +19,8 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>2.0.4</Version>
-    <PackageReleaseNotes>Inclusion of AsArray Functions converters</PackageReleaseNotes>
+    <Version>2.1.0</Version>
+    <PackageReleaseNotes>Critical bugs fixeds</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

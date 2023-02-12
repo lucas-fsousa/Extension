@@ -31,6 +31,12 @@ namespace PublicUtility.Extension {
 
     public static string AsString(this byte[] byteArray) => Encoding.UTF8.GetString(byteArray);
 
+    public static string AsString(this IEnumerable<char> input) {
+      string data = string.Empty;
+      input.ToList().ForEach(x => data += x);
+      return data;
+    }
+
     public static string AsString(this Stream stream) => stream.AsByteArray().AsString();
 
     public static byte[] AsByteArray(this string utf8Base64String) => Encoding.UTF8.GetBytes(utf8Base64String);
@@ -40,7 +46,5 @@ namespace PublicUtility.Extension {
       stream.Read(buffer);
       return buffer;
     }
-    
-
   }
 }

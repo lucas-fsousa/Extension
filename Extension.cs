@@ -171,33 +171,9 @@ namespace PublicUtility.Extension {
       return JsonDeserialize<T>($"[{json.AsString()}]");
     }
 
-    public async static ValueTask<T> DeserializeTableAsync<T>(this DataTable table, CancellationToken cancellationToken = default) where T : IEnumerable {
-      return await Task.Run(T () => {
-        var json = new StringBuilder();
-
-        if(!table.IsFilled())
-          return default;
-
-        int countRow = 0;
-        foreach(DataRow row in table.Rows) {
-          countRow++;
-
-          json.Append('{'); // START JSON OBJECT
-
-          int countCol = 0;
-          foreach(DataColumn col in table.Columns) {
-            countCol++;
-            json.Append(countCol == table.Columns.Count ? GetJsonPropValue(col, row, true) : GetJsonPropValue(col, row)); // JSON PROPS
-          }
-
-          json.Append(countRow == table.Rows.Count ? '}' : "},"); // END JSON OBJECT
-        }
-
-        return JsonDeserialize<T>($"[{json.AsString()}]");
-      }, cancellationToken);
-    }
-
-    public static string RemoveWhiteSpaces(this string str) => str.Where(x => !char.IsWhiteSpace(x)).ToString();
+    public async static ValueTask<T> DeserializeTableAsync<T>(this DataTable table, CancellationToken cancellationToken = default) where T : IEnumerable => await Task.Run(T () => DeserializeTable<T>(table), cancellationToken);
+    
+    public static string RemoveWhiteSpaces(this string str) => str.Where(x => !char.IsWhiteSpace(x)).AsString();
 
     public static T JsonDeserialize<T>(this string jsonStringObject) => JsonSerializer.Deserialize<T>(jsonStringObject, GetJsonSerializerOptions());
 
