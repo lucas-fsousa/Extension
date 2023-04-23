@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
-using System.Runtime.Serialization;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace PublicUtility.Extension {
   public static partial class Extends {

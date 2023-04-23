@@ -5,13 +5,20 @@ namespace PublicUtility.Extension {
   public static partial class Extends {
 
     public static bool IsFilled<T>(this T value) {
-      if(value == null)
+      if(value is null)
         return false;
 
       if(typeof(T) == typeof(string) && value.AsString() == string.Empty) 
         return false;
 
       return true;
+    }
+
+    public static bool IsFilled<T>(this List<T> list) {
+      if(list == null) 
+        return false;
+
+      return list.Any();
     }
     
     public static bool IsFilled<T>(this IEnumerable<T> enumerable) {
@@ -64,7 +71,7 @@ namespace PublicUtility.Extension {
     }
 
     public static bool IsNumber(this string input) {
-      var numbers = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',' };
+      var numbers = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',', '-' };
 
       if(!input.IsFilled())
         return false;
