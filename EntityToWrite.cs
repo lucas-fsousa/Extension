@@ -9,7 +9,6 @@
     internal ConsoleColor Color { get; set; }
   }
 
-
   internal static class CustomConsole {
     private static ConsoleColor GetColor(string color) {
 

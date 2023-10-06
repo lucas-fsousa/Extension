@@ -20,9 +20,9 @@ These items are equivalent to the default "Console.WriteLine" and "Console.Write
 - Println(this string message, object arg = null)
 - Println<T>(this IList<T> list) 
 - Println(this string message)
-- Println<T>(this T[] array)
+- Println<T>(this T?[] array)
 - Println(this object obj)
-- Println<T>(this T obj)
+- Println<T>(this T? obj)
 - Println()
 
 ####
@@ -31,9 +31,9 @@ These items are equivalent to the default "Console.WriteLine" and "Console.Write
 - Print(this string message, object arg = null)
 - Print<T>(this IList<T> list)
 - Print(this string message)
-- Print<T>(this T[] array)
+- Print<T>(this T?[] array)
 - Print(this object obj)
-- Print<T>(this T obj)
+- Print<T>(this T? obj)
 
 #### How to use
 
@@ -90,15 +90,15 @@ Converters are methods for converting value types strategically and quickly duri
 
 - AsDateFormmat(this string dateTime, string formmat = "yyyy/MM/dd HH:mm:ss")
 - AsJsonDateTime(this object data)
-- AsBool<T>(this T obj)
-- AsInt<T>(this T obj)
-- AsLong<T>(this T obj)
-- AsShort<T>(this T obj)
-- AsDouble<T>(this T obj)
-- AsDecimal<T>(this T obj, int precision = 2)
-- AsFloat<T>(this T obj)
-- AsChar<T>(this T obj)
-- AsString<T>(this T obj)
+- AsBool<T>(this T? obj)
+- AsInt<T>(this T? obj)
+- AsLong<T>(this T? obj)
+- AsShort<T>(this T? obj)
+- AsDouble<T>(this T? obj)
+- AsDecimal<T>(this T? obj, int precision = 2)
+- AsFloat<T>(this T? obj)
+- AsChar<T>(this T? obj)
+- AsString<T>(this T? obj)
 
 #### How to use:
 ```csharp
@@ -116,7 +116,7 @@ int convertedToInt = convertedToFloat.AsInt(); // output 1041
 ### GetSafeValue
 Gets the safe value of a return. If the returned value cannot be converted to the specified type, the default value of the specified type will be returned, preventing the application from crashing.
 
-- GetSafeValue<T>(this T value)
+- GetSafeValue<T>(this T? value)
 - GetSafeValue<T>(this object value)
 
 #### How to use:
@@ -136,7 +136,7 @@ The Json Serealization and Deserealization library does not yet offer support fo
 
 - DeserializeTable<T>(this DataTable table)
 - JsonDeserialize<T>(this string jsonStringObject)
-- JsonSerialize<T>(this T objectToSerialize)
+- JsonSerialize<T>(this T? objectToSerialize)
 
 #### How to use:
 ```csharp
@@ -164,12 +164,12 @@ public class MyClass {
 ### Validators
 Used to validate data return in an agile and simplified way to avoid the use of multi conditions.
 
-- IsFilled<T>(this T param) 
+- IsFilled<T>(this T? param) 
 - IsFilled<T>(this IEnumerable<T> enumerable) 
 - IsSomeBool(this string input)
 - IsAnyDate(this string input) 
 - IsNumber(this string input) 
-- IsDefault<T>(this T value) 
+- IsDefault<T>(this T? value) 
 
 #### How to use:
 ```csharp

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <Title>PublicUtility.Extension</Title>
     <Company>Lucas F Sousa</Company>
     <Description>Extension class with public utility methods for conventional and professional use.</Description>
@@ -19,11 +19,12 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>2.1.0</Version>
+    <Version>2.1.2</Version>
     <PackageReleaseNotes>Critical bugs fixeds</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PublicUtility.Nms" Version="1.0.3" />
   </ItemGroup>
 

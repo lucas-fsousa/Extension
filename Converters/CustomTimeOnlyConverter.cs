@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace PublicUtility.Extension.Converters {
   public class CustomTimeOnlyConverter: JsonConverter<TimeOnly> {
     public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
-      var temp = TimeOnly.FromDateTime(reader.GetString().GetSafeValue<DateTime>());
+      var temp = TimeOnly.FromDateTime(reader.GetString().AsDateTime());
       return temp;
     }
 
