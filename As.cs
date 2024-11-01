@@ -29,7 +29,7 @@ namespace PublicUtility.Extension {
 
     public static string AsString(this byte[] byteArray, Encoding? encoding = null) => encoding is null ? Encoding.UTF8.GetString(byteArray) : encoding.GetString(byteArray);
 
-    public static string AsString(this IEnumerable<char>? input) => string.Join("", input ?? Array.Empty<char>());
+    public static string AsString(this IEnumerable<char>? input) => string.Join("", input ?? []);
 
     public static string AsString(this Stream stream) => stream.AsByteArray().AsString();
 
@@ -41,6 +41,9 @@ namespace PublicUtility.Extension {
       return buffer;
     }
 
-    public static Task<TSource[]> AsAsyncArray<TSource>(this IQueryable<TSource> source) => Task.FromResult(source.ToArray());
+    public static IDictionary<string, string> AsDictionary(this string input, string toSplit = ";", string sep = "=") => input.Split(toSplit).Select(s => {
+      var kvp = s.Split(sep);
+      return new KeyValuePair<string, string>(kvp[0], kvp[1]);
+    }).ToDictionary();
   }
 }

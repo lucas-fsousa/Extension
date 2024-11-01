@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-
-namespace PublicUtility.Extension {
+﻿namespace PublicUtility.Extension {
   public static partial class Extends {
 
     public static bool IsFilled<T>(this T? value) {
@@ -39,7 +36,7 @@ namespace PublicUtility.Extension {
       if(arraylist == null)
         return false;
 
-      return arraylist.Any();
+      return arraylist.Length != 0;
     }
     
     public static bool IsDefault<T>(this T? value) {
@@ -54,7 +51,7 @@ namespace PublicUtility.Extension {
         return false;
 
 
-      return boolTypes.Any(v => v.ToLower() == input);
+      return boolTypes.Any(v => v.Equals(input, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public static bool IsAnyDate(this string? input) {

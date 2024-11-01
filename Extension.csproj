@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>PublicUtility.Extension</Title>
@@ -13,13 +13,13 @@
     <PackAsTool>False</PackAsTool>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>DOTNET;.NET7; .NET; EXTENSION; HELPER; ASPNET; UTILS</PackageTags>
+    <PackageTags>DOTNET;.NET8; .NET; EXTENSION; HELPER; ASPNET; UTILS</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Lucas F Sousa</Authors>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Lucas Sousa. All rights reserved.</Copyright>
     <PackageId>PublicUtility.$(AssemblyName)</PackageId>
-    <Version>2.1.2</Version>
+    <Version>2.1.3</Version>
     <PackageReleaseNotes>Critical bugs fixeds</PackageReleaseNotes>
   </PropertyGroup>
 

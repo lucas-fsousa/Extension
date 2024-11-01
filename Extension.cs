@@ -119,7 +119,7 @@ namespace PublicUtility.Extension {
       return false;
     }
 
-    private static IList<Type> DBNums() => new List<Type> { typeof(int), typeof(long), typeof(byte), typeof(sbyte), typeof(decimal), typeof(float), typeof(double), typeof(ulong) };
+    private static IList<Type> DBNums() => [typeof(int), typeof(long), typeof(byte), typeof(sbyte), typeof(decimal), typeof(float), typeof(double), typeof(ulong)];
 
     private static string GetJsonPropValue(DataColumn col, DataRow row, bool endObj = false) {
       string line;
@@ -195,7 +195,14 @@ namespace PublicUtility.Extension {
       return NJ.JsonConvert.SerializeXNode(XDocument.Parse(xmlInput));
     }
 
-    public static string RegexMatch(this string input, string pattern, int group = 1) => Regex.Matches(input, pattern)?.Cast<Match>()?.FirstOrDefault()?.Groups[group].Value ?? "";
+    public static string RegexMatch(this string input, string pattern, int group = 1) => Regex.Match(input, pattern).Groups[group].Value ?? "";
+
+    public static string[] RegexMatches(this string input, string pattern, int? group = null) => Regex.Matches(input, pattern).Select(m => {
+      if(group is null)
+        return m.Value;
+
+      return m.Groups[group.Value].Value;
+    }).ToArray();
 
     public static string RegexReplace(this string input, string pattern, string newValue = "") => Regex.Replace(input, pattern, newValue);
 
@@ -218,7 +225,7 @@ namespace PublicUtility.Extension {
     }
 
     public static T? FirstRng<T>(this T[] array) {
-      if(!array.Any())
+      if(array.Length == 0)
         return default;
 
       var random = new Random(Guid.NewGuid().GetHashCode());
@@ -238,5 +245,48 @@ namespace PublicUtility.Extension {
 
       return newString;
     }
+
+    public static bool Contains(this IEnumerable<string> data, IEnumerable<string> data2) => data2.Any(s => data.Contains(s));
+
+    public static void ForEach<T>(this IEnumerable<T> data, Action<T> action) {
+      foreach(var item in data)
+        action(item);
+    }
+
+    public static async Task ForEachAsync<T>(this IEnumerable<T> data, Func<T, Task> action) {
+      foreach(var item in data)
+        await action(item);
+    }
+
+    public static void Pagination<T>(this IEnumerable<T> data, Action<IEnumerable<T>> action, int batchSize = 5000) where T : class {
+      var page = 0;
+      var array = data.Skip(page * batchSize).Take(batchSize);
+      while(array.Any()) {
+        action(array);
+        page++;
+        array = data.Skip(page * batchSize).Take(batchSize);
+      }
+    }
+
+    public static async Task PaginationAsync<T>(this IEnumerable<T> data, Func<IEnumerable<T>, Task> action, int batchSize = 5000) where T : class {
+      var page = 0;
+      var enumerable = data.Skip(page * batchSize).Take(batchSize);
+      while(enumerable.Any()) {
+        await action(enumerable);
+        page++;
+        enumerable = data.Skip(page * batchSize).Take(batchSize);
+      }
+    }
+
+    public static bool ContainsIgnoreCase(this string value, string compare, StringComparison cmp = StringComparison.InvariantCultureIgnoreCase) => value.Contains(compare, cmp);
+
+    public static bool EqualsIgnoreCase(this string value, string compare, StringComparison cmp = StringComparison.InvariantCultureIgnoreCase) => value.Equals(compare, cmp);
+
+    public static bool ContainsIgnoreCase(this IEnumerable<string> values, string compare, StringComparison cmp = StringComparison.InvariantCultureIgnoreCase) => values.Any(v => v.ContainsIgnoreCase(compare, cmp));
+
+    public static bool StartsWithIgnoreCase(this string value, string compare, StringComparison cmp = StringComparison.InvariantCultureIgnoreCase) => value.StartsWith(compare, cmp);
+
+    public static bool EndsWithIgnoreCase(this string value, string compare, StringComparison cmp = StringComparison.InvariantCultureIgnoreCase) => value.EndsWith(compare, cmp);
+
   }
 }
